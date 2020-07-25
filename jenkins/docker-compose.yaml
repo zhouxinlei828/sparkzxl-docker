@@ -1,0 +1,14 @@
+version: '3'
+services:
+  jenkins:
+   image: jenkins/jenkins:lts
+   container_name: jenkins
+   restart: always
+   environment:
+    - 'JAVA_OPTS=-Duser.timezone=Asia/Shanghai'
+   volumes:
+    - /etc/localtime:/etc/localtime
+    - ./jenkins_home:/var/jenkins_home
+   ports:
+    - 8761:8080
+    - 50000:50000

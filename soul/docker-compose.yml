@@ -1,0 +1,12 @@
+version: '3'
+services:
+  soul-admin:
+    image: registry.cn-hangzhou.aliyuncs.com/zhouxinlei/soul-admin:latest
+    container_name: soul-admin
+    environment:
+      - "jdbcUrl=jdbc:mysql://rm-bp1cp68o8t1gq604p5o.mysql.rds.aliyuncs.com/soul?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8"
+      - "username=zhouxinlei"
+      - "password=zxl298828"
+    ports:
+      - 9095:9095
+    restart: always

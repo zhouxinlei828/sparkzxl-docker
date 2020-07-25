@@ -1,0 +1,11 @@
+version: '3'
+services:
+  showdoc:
+    image: star7th/showdoc
+    container_name: showdoc
+    command: --user=root --privileged=true
+    restart: always
+    volumes:
+      - ./data/html:/var/www/html/
+    ports:
+      - 8081:80

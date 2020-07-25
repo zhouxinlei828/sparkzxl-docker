@@ -1,0 +1,44 @@
+#=========================== Filebeat inputs =============================
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/springboot/sparksys-authorization.log # 配置我们要读取的 Spring Boot 应用的日志
+  fields:
+      #定义日志来源，添加了自定义字段
+    log_source: authorization
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/springboot/sparksys-gateway.log
+  fields:
+    log_source: gateway
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/springboot/sparksys-file.log
+  fields:
+    log_source: file
+- type: log
+  enabled: true
+  paths:
+    - /var/logs/springboot/sparksys-oauth.log
+  fields:
+    log_source: oauth
+#================================ Outputs =====================================
+#-------------------------- Elasticsearch output ------------------------------
+#output.elasticsearch:
+  # Array of hosts to connect to.
+  # hosts: ["192.168.3.3:9200"]
+
+#----------------------------- Logstash output --------------------------------
+#output.logstash:
+  # The Logstash hosts
+#  hosts: ["logstash:5044"]
+
+
+#----------------------------- kafka output --------------------------------
+output.kafka:
+  enabled: true
+  hosts: ["192.168.3.20:9092"]
+  topic: "sparksys-%{[fields.log_source]}"

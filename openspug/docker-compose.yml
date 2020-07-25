@@ -1,0 +1,8 @@
+version: '3'
+services:
+  spug:
+    image: elasticsearch:7.7.1
+    container_name: registry.aliyuncs.com/openspug/spug
+    ports:
+      - 8092:80
+    restart: always
