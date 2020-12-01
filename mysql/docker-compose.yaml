@@ -11,5 +11,5 @@ services:
       - 3306:3306
     volumes:
       - ./data/db:/var/lib/mysql #数据文件挂载
-      - ./data/conf:/etc/mysql/conf.d #配置文件挂载
-      - ./log:/var/log/mysql #日志文件挂载
+      - ./conf:/etc/mysql #配置文件挂载
+      - ./logs:/var/log/mysql #日志文件挂载
