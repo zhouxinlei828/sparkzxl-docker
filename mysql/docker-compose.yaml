@@ -2,11 +2,12 @@ version: '3.1'
 services:
   mysql:
     image: mysql:5.7
-    container_name: mysql
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    container_name: mysql_web
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root #设置root帐号密码
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    entrypoint: bash -c "chown -R mysql:mysql /var/log/mysql && exec /entrypoint.sh mysqld"
     ports:
       - 3306:3306
     volumes:
