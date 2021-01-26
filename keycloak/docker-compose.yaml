@@ -1,0 +1,33 @@
+version: '3'
+
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+  keycloak:
+    image: jboss/keycloak
+    container_name: keycloak
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: rm-bp1cp68o8t1gq604p5o.mysql.rds.aliyuncs.com
+      DB_DATABASE: keycloak
+      DB_USER: zhouxinlei
+      DB_PASSWORD: Zxl298828
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: 123456
+      JDBC_PARAMS: "connectTimeout=30000"
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
