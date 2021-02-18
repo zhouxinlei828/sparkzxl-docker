@@ -5,12 +5,12 @@ services:
     container_name: keycloak
     environment:
       DB_VENDOR: MYSQL
-      DB_ADDR: rm-bp1cp68o8t1gq604p5o.mysql.rds.aliyuncs.com
+      DB_ADDR: 47.114.40.129
       DB_DATABASE: keycloak
-      DB_USER: zhouxinlei
-      DB_PASSWORD: Zxl298828
+      DB_USER: root
+      DB_PASSWORD: root
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: 123456
       JDBC_PARAMS: "connectTimeout=30000"
     ports:
-      - 80:8080
+      - 8760:8080
