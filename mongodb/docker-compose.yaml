@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  mongodb:
+   image: mongo:latest
+   container_name: mongodb
+   restart: always
+   environment:
+     - MONGO_DATA_DIR=/data/mongofb/db
+     - MONGO_LOG_DIR=/data/logs
+     - MONGO_INITDB_ROOT_USERNAME=admin
+     - MONGO_INITDB_ROOT_PASSWORD=Fb123456
+   volumes:
+     - ./data:/data/db
+     - ./logs:/data/logs
+     - ./config/mongod.conf.orig:/etc/mongod.conf.orig
+   ports:
+     - 27017:27017
