@@ -1,0 +1,14 @@
+version: '3'
+services:
+  kafka-manager-web:
+    image: registry.cn-hangzhou.aliyuncs.com/sparkzxl/kafka-manager-web:2.3.0
+    container_name: kafka-manager-web
+    environment:
+      MYSQL_SERVICE_HOST: sparkzxl.mysql.rds.aliyuncs.com
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: zhouxinlei
+      MYSQL_SERVICE_PASSWORD: Zxl298828
+      MYSQL_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    ports:
+      - 8701:8080
+    restart: always
