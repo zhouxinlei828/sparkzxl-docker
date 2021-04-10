@@ -1,5 +1,2 @@
 #!/bin/bash
-docker stop jenkins && docker rm jenkins
-
-rm -rf jenkins_home
-
+docker-compose down && rm -rf data

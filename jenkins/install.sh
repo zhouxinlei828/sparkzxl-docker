@@ -1,4 +1,3 @@
 #!/bin/bash
-mkdir jenkins_home
-chmod 777 -R jenkins_home
+mkdir data && chmod -R 777 data
 docker-compose up -d
