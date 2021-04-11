@@ -1,17 +1,34 @@
 version: '3.3'
 services:
+  elasticsearch:
+    image: elasticsearch:7.7.1
+    container_name: elasticsearch
+    environment:
+      - "cluster.name=elasticsearch"
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx2g"
+    volumes:
+      - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    restart: always
   oap:
-    image: skywalking/oap
+    image: apache/skywalking-oap-server:8.4.0-es7
     container_name: oap
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
     restart: always
     ports:
-      - 11801:11800
-      - 12801:12800
+      - 11800:11800
+      - 12800:12800
     environment:
       SW_STORAGE: elasticsearch7
-      SW_STORAGE_ES_CLUSTER_NODES: 172.34.200.5:9200
+      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
   skywalking-ui:
-    image: skywalking/ui
+    image: apache/skywalking-ui
     container_name: skywalking-ui
     depends_on:
       - oap
@@ -21,6 +38,6 @@ services:
     ports:
       - 8605:8080
     environment:
-      SW_OAP_ADDRESS: 172.34.200.5:12801
-      collector.ribbon.listOfServers: 172.34.200.5:12801
+      SW_OAP_ADDRESS: 192.168.3.14:12800
+      collector.ribbon.listOfServers: oap:12800
       security.user.admin.password: 123456
